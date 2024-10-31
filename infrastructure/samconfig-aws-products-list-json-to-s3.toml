@@ -1,0 +1,12 @@
+version = 0.3
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "aws-blog-rss-to-s3"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-bf5lh3yhtzwl"
+s3_prefix = "aws-blog-rss-to-s3"
+region = "us-west-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "SourceUrl=\"https://aws.amazon.com/blogs/aws/feed/\" ContentType=\"application/rss+xml\" S3BucketName=\"amazonoraws.com\" S3KeyName=\"aws-feed-latest.rss\""
+image_repositories = []
