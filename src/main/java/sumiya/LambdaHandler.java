@@ -14,17 +14,18 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
-public class JsonToS3Lambda implements RequestHandler<ScheduledEvent, String> {
+public class LambdaHandler implements RequestHandler<ScheduledEvent, String> {
 
     private final S3Client s3Client;
     private final HttpClient httpClient;
 
     // Environment variables
     private static final String SOURCE_URL = System.getenv("SOURCE_URL");
+    private static final String CONTENT_TYPE = System.getenv("CONTENT_TYPE");
     private static final String S3_BUCKET = System.getenv("S3_DESTINATION_BUCKET");
     private static final String S3_KEY = System.getenv("S3_DESTINATION_KEY");
 
-    public JsonToS3Lambda() {
+    public LambdaHandler() {
         this.s3Client = S3Client.builder().build();
         this.httpClient = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(10))
@@ -36,7 +37,7 @@ public class JsonToS3Lambda implements RequestHandler<ScheduledEvent, String> {
         try {
             String content = fetchContent(SOURCE_URL);
             uploadToS3(content);
-            return "Successfully fetched source content and uploaded to S3.";
+            return "Successfully fetched content from " + SOURCE_URL + " and uploaded to S3 at " + S3_BUCKET + "/" + S3_KEY;
         } catch (Exception e) {
             throw new RuntimeException("Failed to fetch content: " + e.getMessage(), e);
         }
@@ -63,7 +64,7 @@ public class JsonToS3Lambda implements RequestHandler<ScheduledEvent, String> {
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(S3_BUCKET)
                 .key(S3_KEY)
-                .contentType("application/json")
+                .contentType(CONTENT_TYPE)
                 .build();
 
         s3Client.putObject(putObjectRequest,

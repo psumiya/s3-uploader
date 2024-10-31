@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-public class JsonToS3LambdaTest {
+public class LambdaHandlerTest {
 
     @Test
     public void test() throws IOException, InterruptedException {
-        LambdaHandler rssToS3Lambda = new LambdaHandler();
-        String content = rssToS3Lambda.fetchContent("https://aws.amazon.com/api/dirs/items/search?item.directoryId=aws-products&sort_by=item.additionalFields.launchDate&sort_order=asc&size=500&item.locale=en_US&tags.id=aws-products%23type%23service&tags.id=!aws-products%23type%23variant");
+        LambdaHandler lambdaHandler = new LambdaHandler();
+        String content = lambdaHandler.fetchContent("https://amazonoraws.com/aws-feed-latest.rss");
         System.out.println(content);
     }
 
