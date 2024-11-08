@@ -11,3 +11,8 @@ flowchart LR
 
 ```
 
+## Deploy
+
+* Pre-requisite: `sam` cli
+* `cd infrastructure`
+* Run `sam deploy`

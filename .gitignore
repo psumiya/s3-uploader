@@ -41,7 +41,4 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-/infrastructure/samconfig.toml
-/infrastructure/samconfig-aws-architecture.toml
-/infrastructure/samconfig-aws-products-list-json-to-s3.toml
-/infrastructure/samconfig-lastweekinaws.toml
+/infrastructure/*.toml
