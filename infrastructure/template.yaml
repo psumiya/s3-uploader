@@ -9,7 +9,7 @@ Parameters:
 
   ContentType:
     Type: String
-    Description: Content-Type pf the content, such as application/json
+    Description: Content-Type of the content, such as application/json
 
   S3BucketName:
     Type: String
